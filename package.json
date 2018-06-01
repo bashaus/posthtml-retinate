@@ -1,0 +1,30 @@
+{
+  "name": "posthtml-retinate",
+  "version": "1.0.0",
+  "description": "Create the srcset attribute for retina images with posthtml",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "istanbul cover node_modules/jasmine/bin/jasmine.js"
+  },
+  "keywords": [
+    "retina",
+    "retinate",
+    "posthtml",
+    "srcset",
+    "resize",
+    "scale",
+    "image"
+  ],
+  "author": "Bashkim Isai",
+  "license": "MIT",
+  "dependencies": {
+    "extend": "^3.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "expect": "^23.1.0",
+    "istanbul": "^0.4.5",
+    "jasmine": "^3.1.0",
+    "posthtml": "^0.11.3"
+  }
+}
