@@ -1,6 +1,6 @@
 {
   "name": "posthtml-retinate",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Create the srcset attribute for retina images with posthtml",
   "keywords": [
     "retina",
