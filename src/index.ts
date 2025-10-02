@@ -39,7 +39,11 @@ export default function Retinate(pluginOptions: Partial<RetinateOptions>) {
       const filename = path.basename(node.attrs["src"], extname);
 
       // Find scale
-      const inputScale = Object.keys(options.inputFlags).find((scale) =>
+      const inputScales = Object.keys(options.inputFlags) as unknown as Array<
+        keyof RetinateOptions["inputFlags"]
+      >;
+
+      const inputScale = inputScales.find((scale) =>
         filename[options.inputPlace](options.inputFlags[scale]),
       );
 
@@ -63,7 +67,11 @@ export default function Retinate(pluginOptions: Partial<RetinateOptions>) {
       }
 
       // Identify relevant output formats
-      const outputScales = Object.keys(options.outputFlags).filter((scale) =>
+      const allOutputScales = Object.keys(
+        options.outputFlags,
+      ) as unknown as Array<keyof RetinateOptions["outputFlags"]>;
+
+      const outputScales = allOutputScales.filter((scale) =>
         options.scaleUp ? true : scale <= inputScale,
       );
 
@@ -81,13 +89,23 @@ export default function Retinate(pluginOptions: Partial<RetinateOptions>) {
     });
   };
 
-  function generateOutputSrcset(dirname, filestem, scale, extname) {
+  function generateOutputSrcset(
+    dirname: string,
+    filestem: string,
+    scale: keyof RetinateOptions["outputFlags"],
+    extname: string,
+  ) {
     return (
       generateOutputSrc(dirname, filestem, scale, extname) + " " + scale + "x"
     );
   }
 
-  function generateOutputSrc(dirname, filestem, scale, extname) {
+  function generateOutputSrc(
+    dirname: string,
+    filestem: string,
+    scale: keyof RetinateOptions["outputFlags"],
+    extname: string,
+  ) {
     if (options.outputPlace == "append") {
       return dirname + filestem + options.outputFlags[scale] + extname;
     }
