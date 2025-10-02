@@ -1,8 +1,7 @@
-const posthtml = require('posthtml');
-const retinate = require('..');
+const posthtml = require("posthtml");
+const retinate = require("..");
 
 module.exports = function (inputHTML, options = {}) {
-  return posthtml().use(retinate(options))
-    .process(inputHTML, { sync: true })
+  return posthtml().use(retinate(options)).process(inputHTML, { sync: true })
     .html;
 };
