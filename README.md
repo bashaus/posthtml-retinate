@@ -14,7 +14,7 @@ npm install posthtml posthtml-retinate
 
 ## Example
 
-```javascript
+```typescript
 import posthtml from "posthtml";
 import retinate from "posthtml-retinate";
 
