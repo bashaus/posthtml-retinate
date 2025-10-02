@@ -1,7 +1,15 @@
-const path = require("path");
-const extend = require("extend");
+import path from "path";
+import { Node } from "posthtml";
 
-const DEFAULT_OPTIONS = {
+export type RetinateOptions = {
+  inputFlags: Record<number, string>;
+  inputPlace: "startsWith" | "endsWith";
+  outputFlags: Record<number, string>;
+  outputPlace: "prepend" | "append";
+  scaleUp: boolean;
+};
+
+const defaultOptions: RetinateOptions = {
   inputFlags: { 1: "@1x", 2: "@2x", 4: "@4x" },
   inputPlace: "endsWith",
   outputFlags: { 1: "", 2: "@2x", 4: "@4x" },
@@ -9,27 +17,35 @@ const DEFAULT_OPTIONS = {
   scaleUp: false,
 };
 
-module.exports = function (options) {
-  options = extend({}, DEFAULT_OPTIONS, options);
+export default function Retinate(pluginOptions: Partial<RetinateOptions>) {
+  const options: RetinateOptions = {
+    ...defaultOptions,
+    ...pluginOptions,
+  };
 
-  return function (tree) {
-    tree.match({ tag: "img" }, (node) => {
-      node.attrs = node.attrs || {};
+  return function (tree: Node) {
+    tree.match({ tag: "img" }, (node: Node) => {
+      node.attrs = node.attrs ?? {};
 
-      if (!node.attrs.src) return node;
+      if (!node.attrs["src"]) {
+        return node;
+      }
 
       // Identify file name information
-      const dirpath = path.dirname(node.attrs.src);
+      const dirpath = path.dirname(node.attrs["src"]);
       const dirname = dirpath == "." ? "" : dirpath + "/";
 
-      const extname = path.extname(node.attrs.src);
-      const filename = path.basename(node.attrs.src, extname);
+      const extname = path.extname(node.attrs["src"]);
+      const filename = path.basename(node.attrs["src"], extname);
 
       // Find scale
       const inputScale = Object.keys(options.inputFlags).find((scale) =>
         filename[options.inputPlace](options.inputFlags[scale]),
       );
-      if (!inputScale) return node;
+
+      if (!inputScale) {
+        return node;
+      }
 
       // Find filestem
       let filestem = "";
@@ -57,8 +73,8 @@ module.exports = function (options) {
         .join(", ");
 
       if (srcset) {
-        node.attrs.srcset = srcset;
-        node.attrs.src = generateOutputSrc(dirname, filestem, 1, extname);
+        node.attrs["srcset"] = srcset;
+        node.attrs["src"] = generateOutputSrc(dirname, filestem, 1, extname);
       }
 
       return node;
@@ -78,4 +94,4 @@ module.exports = function (options) {
 
     return dirname + options.outputFlags[scale] + filestem + extname;
   }
-};
+}

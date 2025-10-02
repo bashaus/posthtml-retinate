@@ -19,8 +19,9 @@ const posthtml = require("posthtml");
 const retinate = require("posthtml-retinate");
 
 const inputHTML = '<img src="image@4x.png">'; // highest resolution image
-const outputHTML = posthtml().use(retinate()).process(inputHTML, { sync: true }).html;
+const output = await posthtml().use(retinate()).process(inputHTML);
 
+const outputHTML = output.html;
 // <img src="image.png" srcset="image@2x.png 2x, image@4x.png 4x">
 ```
 

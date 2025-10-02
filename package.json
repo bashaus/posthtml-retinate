@@ -11,16 +11,23 @@
     "scale",
     "image"
   ],
+  "homepage": "https://github.com/bashaus/posthtml-retinate",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bashaus/posthtml-retinate.git"
+  },
   "license": "MIT",
-  "author": "Bashkim Isai",
-  "main": "src/index.js",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "./dist"
+  ],
   "scripts": {
+    "build": "tsc --project tsconfig.build.json",
+    "clean": "rm -rf dist/",
     "lint": "eslint .",
     "prepare": "husky",
-    "test": "istanbul cover node_modules/jasmine/bin/jasmine.js"
-  },
-  "dependencies": {
-    "extend": "^3.0.1"
+    "test": "jest"
   },
   "devDependencies": {
     "@commitlint/cli": "20.1.0",
@@ -33,10 +40,7 @@
     "eslint": "^9.36.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
-    "expect": "^23.1.0",
     "husky": "^9.1.7",
-    "istanbul": "^0.4.5",
-    "jasmine": "^3.1.0",
     "jest": "^30.2.0",
     "jest-junit": "^16.0.0",
     "posthtml": "^0.16.6",
