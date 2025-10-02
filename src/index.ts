@@ -17,7 +17,7 @@ const defaultOptions: RetinateOptions = {
   scaleUp: false,
 };
 
-export default function Retinate(pluginOptions: Partial<RetinateOptions>) {
+export default function retinate(pluginOptions: Partial<RetinateOptions>) {
   const options: RetinateOptions = {
     ...defaultOptions,
     ...pluginOptions,
