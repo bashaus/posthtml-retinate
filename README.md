@@ -14,9 +14,9 @@ npm install posthtml posthtml-retinate
 
 ## Example
 
-```javascript
-const posthtml = require("posthtml");
-const retinate = require("posthtml-retinate");
+```typescript
+import posthtml from "posthtml";
+import retinate from "posthtml-retinate";
 
 const inputHTML = '<img src="image@4x.png">'; // highest resolution image
 const output = await posthtml().use(retinate()).process(inputHTML);
