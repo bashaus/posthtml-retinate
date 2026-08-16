@@ -90,5 +90,5 @@ When `true`:
 [url:posthtml]: https://github.com/posthtml/posthtml
 [img:codecov]: https://codecov.io/gh/bashaus/posthtml-retinate/graph/badge.svg?token=NBU47OW0JG
 [url:codecov]: https://codecov.io/gh/bashaus/posthtml-retinate
-[img:gh-build]: https://github.com/bashaus/posthtml-retinate/actions/workflows/build.yml/badge.svg
-[url:gh-build]: https://github.com/bashaus/posthtml-retinate/actions/workflows/build.yml
+[img:gh-build]: https://github.com/bashaus/posthtml-retinate/actions/workflows/test.yaml/badge.svg
+[url:gh-build]: https://github.com/bashaus/posthtml-retinate/actions/workflows/test.yaml
